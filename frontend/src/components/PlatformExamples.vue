@@ -85,6 +85,30 @@ const platformExamples = computed(() => [
       'https://m.youtube.com/watch?v=dQw4w9WgXcQ',
       'https://youtube.com/shorts/ABC123def456'
     ]
+  },
+  {
+    name: 'VK',
+    description: t('examples.vk'),
+    bgClass: 'bg-blue-600',
+    logo: `<svg viewBox="0 0 24 24" fill="white"><path d="M15.07 2H8.93C3.33 2 2 3.33 2 8.93v6.14C2 20.67 3.33 22 8.93 22h6.14c5.6 0 6.93-1.33 6.93-6.93V8.93C22 3.33 20.67 2 15.07 2zm3.01 14.87h-1.39c-.52 0-.68-.42-1.62-1.37-.82-.79-1.18-.9-1.39-.9-.29 0-.37.08-.37.48v1.25c0 .33-.11.53-1.01.53-1.49 0-3.14-.9-4.3-2.58-1.75-2.3-2.23-4.02-2.23-4.37 0-.21.08-.4.48-.4h1.39c.36 0 .5.16.64.54.7 2.03 1.87 3.81 2.35 3.81.18 0 .27-.08.27-.54v-2.1c-.06-.99-.58-1.08-.58-1.43 0-.17.14-.33.37-.33h2.18c.31 0 .42.16.42.51v2.83c0 .31.14.42.23.42.18 0 .33-.11.67-.45 1.04-1.17 1.79-2.98 1.79-2.98.1-.21.26-.4.66-.4h1.39c.42 0 .51.21.42.51-.16.75-1.8 3.17-1.8 3.17-.15.24-.21.35 0 .62.15.2.67.66 1.01 1.06.63.71 1.12 1.31 1.25 1.73.12.41-.09.62-.51.62z"/></svg>`,
+    urls: [
+      'https://vk.com/video-12345678_456239017',
+      'https://vkvideo.ru/video-220754053_456241738',
+      'https://vk.ru/video123456789',
+      'https://m.vk.com/video-12345_67890'
+    ]
+  },
+  {
+    name: 'Rutube',
+    description: t('examples.rutube'),
+    bgClass: 'bg-orange-600',
+    logo: `<svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>`,
+    urls: [
+      'https://rutube.ru/video/abc123def456ghi789/',
+      'https://rutube.ru/video/1234567890abcdef/',
+      'https://rutube.ru/play/embed/1234567890',
+      'https://rutube.ru/video/private/abc123def456/'
+    ]
   }
 ]);
 </script>

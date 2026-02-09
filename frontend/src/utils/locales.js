@@ -2,12 +2,14 @@ export const translations = {
   ru: {
     hero: {
       title: 'Скачивай видео легко',
-      subtitle: 'TikTok • Instagram • YouTube'
+      subtitle: 'TikTok • Instagram • YouTube • VK • Rutube'
     },
     platforms: {
       noWatermark: 'Без водяных знаков',
       reelsStories: 'Reels и Stories',
-      hdQuality: 'HD качество'
+      hdQuality: 'HD качество',
+      vkVideos: 'Видео и клипы',
+      rutubeVideos: 'Русские видео'
     },
     input: {
       placeholder: 'Вставь ссылку на видео...'
@@ -54,7 +56,9 @@ export const translations = {
       title: 'Примеры поддерживаемых ссылок',
       tiktok: 'Без водяных знаков, все форматы ссылок',
       instagram: 'Reels, посты, TV и Stories',
-      youtube: 'Видео, Shorts, HD качество'
+      youtube: 'Видео, Shorts, HD качество',
+      vk: 'Видео из VK и VK Video',
+      rutube: 'Видео с Rutube'
     },
     api: {
       title: 'Документация API',
@@ -68,12 +72,14 @@ export const translations = {
   en: {
     hero: {
       title: 'Download Videos Easily',
-      subtitle: 'TikTok • Instagram • YouTube'
+      subtitle: 'TikTok • Instagram • YouTube • VK • Rutube'
     },
     platforms: {
       noWatermark: 'No Watermarks',
       reelsStories: 'Reels & Stories',
-      hdQuality: 'HD Quality'
+      hdQuality: 'HD Quality',
+      vkVideos: 'Videos & Clips',
+      rutubeVideos: 'Russian Videos'
     },
     input: {
       placeholder: 'Paste video link...'
@@ -120,7 +126,9 @@ export const translations = {
       title: 'Supported URL Examples',
       tiktok: 'No watermarks, all URL formats',
       instagram: 'Reels, posts, TV and Stories',
-      youtube: 'Videos, Shorts, HD quality'
+      youtube: 'Videos, Shorts, HD quality',
+      vk: 'Videos from VK and VK Video',
+      rutube: 'Videos from Rutube'
     },
     api: {
       title: 'API Documentation',

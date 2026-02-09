@@ -1,6 +1,8 @@
 import { downloadTikTok } from './tiktok.js';
 import { downloadInstagram } from './instagram.js';
 import { downloadYouTube } from './youtube.js';
+import { downloadVK } from './vk.js';
+import { downloadRutube } from './rutube.js';
 
 export async function downloadVideo(url, platform) {
   try {
@@ -13,6 +15,13 @@ export async function downloadVideo(url, platform) {
       
       case 'youtube':
         return await downloadYouTube(url);
+      
+      case 'vk':
+      case 'vk video':
+        return await downloadVK(url);
+      
+      case 'rutube':
+        return await downloadRutube(url);
       
       default:
         return {

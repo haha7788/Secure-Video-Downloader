@@ -19,6 +19,8 @@ ${t.canDownload}
 ✅ ${t.tiktok}
 ✅ ${t.instagram}
 ✅ ${t.youtube}
+✅ ${t.vk}
+✅ ${t.rutube}
 
 ${t.sendLink}
 `.trim();
@@ -57,6 +59,8 @@ ${t.supportedPlatforms}
 🎵 *TikTok* — ${t.tiktok}
 📸 *Instagram* — ${t.instagram}
 ▶️ *YouTube* — ${t.youtube}
+🎬 *VK* — ${t.vk}
+📺 *Rutube* — ${t.rutube}
 
 ${t.howToUse}
 ${t.step1}
@@ -67,6 +71,8 @@ ${t.examples}
 • \`tiktok.com/@user/video/...\`
 • \`instagram.com/reel/...\`
 • \`youtube.com/watch?v=...\`
+• \`vk.com/video-12345_67890\` или \`vkvideo.ru/video-...\`
+• \`rutube.ru/video/abc123/\`
 
 ${t.features}
 ${t.noWatermarks}

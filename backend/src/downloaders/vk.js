@@ -1,0 +1,52 @@
+import YTDlpWrap from 'yt-dlp-wrap';
+const YTDlp = YTDlpWrap.default || YTDlpWrap;
+import path from 'path';
+import crypto from 'crypto';
+import fs from 'fs';
+
+export async function downloadVK(url) {
+  try {
+    const ytDlpPath = process.env.YTDLP_PATH || './yt-dlp';
+    const ytDlpWrap = new YTDlp(ytDlpPath);
+    
+    const filename = `vk_${crypto.randomBytes(8).toString('hex')}.mp4`;
+    const filePath = path.join(process.cwd(), 'downloads', filename);
+    
+    let videoInfo;
+    try {
+      videoInfo = await ytDlpWrap.getVideoInfo(url);
+    } catch (e) {
+      console.error('Error getting VK video info:', e);
+      videoInfo = { title: 'VK Video' };
+    }
+    
+    await ytDlpWrap.execPromise([
+      url,
+      '-f', 'best[ext=mp4]/best',
+      '--merge-output-format', 'mp4',
+      '-o', filePath,
+      '--quiet',
+      '--no-warnings'
+    ]);
+    
+    if (!fs.existsSync(filePath)) {
+      throw new Error('Video file was not created');
+    }
+    
+    const duration = videoInfo.duration ? `${Math.floor(videoInfo.duration / 60)}:${String(Math.floor(videoInfo.duration % 60)).padStart(2, '0')}` : null;
+    
+    return {
+      success: true,
+      filePath,
+      title: videoInfo.title || 'VK Video',
+      duration: duration
+    };
+    
+  } catch (error) {
+    console.error('VK download error:', error);
+    return {
+      success: false,
+      error: 'Не удалось скачать видео с VK'
+    };
+  }
+}

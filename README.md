@@ -10,13 +10,15 @@
 
 ### 🌟 Overview
 
-**SecureVideoDownloader** is a modern, full-stack application for downloading videos from popular platforms like TikTok, Instagram, and YouTube. Built with security, speed, and user experience in mind.
+**SecureVideoDownloader** is a modern, full-stack application for downloading videos from popular platforms like TikTok, Instagram, YouTube, VK, and Rutube. Built with security, speed, and user experience in mind.
 
 ### ✨ Features
 
 - 🎵 **TikTok** - Download videos without watermarks
 - 📸 **Instagram** - Support for Reels, Posts, Stories, and IGTV
 - ▶️ **YouTube** - Download videos and Shorts in HD quality
+- 🎬 **VK** - Download videos from VK and VK Video
+- 📺 **Rutube** - Download videos from Rutube
 - 🌐 **Multi-language** - English and Russian interface
 - 🌙 **Dark/Light Mode** - Adaptive theme with system preference detection
 - 🤖 **Telegram Bot** - Download videos directly in Telegram
@@ -156,15 +158,26 @@ SecureVideoDownloader/
 
 ### 📚 API Documentation
 
+**Supported Platforms:**
+
+- ✅ TikTok (with/without watermark)
+- ✅ Instagram (Reels, Posts, Stories, IGTV)
+- ✅ YouTube (Videos, Shorts)
+- ✅ VK (Videos from vk.com, vk.ru, and vkvideo.ru)
+- ✅ Rutube (Videos from rutube.ru)
+
 **Quick Example:**
 
 ```javascript
-// Download video
 const response = await fetch('http://localhost:3000/api/download', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
     url: 'https://www.tiktok.com/@user/video/123456'
+    // url: 'https://www.instagram.com/reel/ABC123/'
+    // url: 'https://www.youtube.com/watch?v=abc123'
+    // url: 'https://vk.com/video-12345_67890'
+    // url: 'https://rutube.ru/video/abc123/'
   })
 });
 
@@ -184,13 +197,15 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ### 🌟 Обзор
 
-**SecureVideoDownloader** — это современное full-stack приложение для загрузки видео с популярных платформ, таких как TikTok, Instagram и YouTube. Разработано с акцентом на безопасность, скорость и удобство использования.
+**SecureVideoDownloader** — это современное full-stack приложение для загрузки видео с популярных платформ, таких как TikTok, Instagram, YouTube, VK и Rutube. Разработано с акцентом на безопасность, скорость и удобство использования.
 
 ### ✨ Функции
 
 - 🎵 **TikTok** - Загрузка видео без водяных знаков
 - 📸 **Instagram** - Поддержка Reels, постов, Stories и IGTV
 - ▶️ **YouTube** - Загрузка видео и Shorts в HD качестве
+- 🎬 **VK** - Загрузка видео из VK и VK Video
+- 📺 **Rutube** - Загрузка видео с Rutube
 - 🌐 **Мультиязычность** - Интерфейс на английском и русском
 - 🌙 **Тёмная/Светлая тема** - Адаптивная тема с определением системных настроек
 - 🤖 **Telegram бот** - Загрузка видео прямо в Telegram
@@ -330,15 +345,26 @@ SecureVideoDownloader/
 
 ### 📚 Документация API
 
+**Поддерживаемые платформы:**
+
+- ✅ TikTok (с/без водяных знаков)
+- ✅ Instagram (Reels, посты, Stories, IGTV)
+- ✅ YouTube (Видео, Shorts)
+- ✅ VK (Видео с vk.com, vk.ru и vkvideo.ru)
+- ✅ Rutube (Видео с rutube.ru)
+
 **Быстрый пример:**
 
 ```javascript
-// Загрузка видео
 const response = await fetch('http://localhost:3000/api/download', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
     url: 'https://www.tiktok.com/@user/video/123456'
+    // url: 'https://www.instagram.com/reel/ABC123/'
+    // url: 'https://www.youtube.com/watch?v=abc123'
+    // url: 'https://vk.com/video-12345_67890'
+    // url: 'https://rutube.ru/video/abc123/'
   })
 });
 

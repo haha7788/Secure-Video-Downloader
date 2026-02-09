@@ -22,5 +22,13 @@ export function detectPlatform(url) {
     return 'YouTube';
   }
   
+  if (urlLower.includes('vk.com') || urlLower.includes('vk.ru') || urlLower.includes('vkvideo.ru')) {
+    return 'VK';
+  }
+  
+  if (urlLower.includes('rutube.ru')) {
+    return 'Rutube';
+  }
+  
   return null;
 }

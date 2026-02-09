@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
     if (!platform) {
       return res.status(400).json({
         success: false,
-        error: 'Unsupported platform. Supported: TikTok, Instagram, YouTube'
+        error: 'Unsupported platform. Supported: TikTok, Instagram, YouTube, VK, Rutube'
       });
     }
 
