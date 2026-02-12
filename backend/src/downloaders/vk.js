@@ -4,12 +4,14 @@ import path from 'path';
 import crypto from 'crypto';
 import fs from 'fs';
 
-export async function downloadVK(url) {
+export async function downloadVK(url, options = {}) {
   try {
+    const { format = 'mp4', quality = '720' } = options;
     const ytDlpPath = process.env.YTDLP_PATH || './yt-dlp';
     const ytDlpWrap = new YTDlp(ytDlpPath);
     
-    const filename = `vk_${crypto.randomBytes(8).toString('hex')}.mp4`;
+    const fileExt = format === 'mp3' ? 'mp3' : format;
+    const filename = `vk_${crypto.randomBytes(8).toString('hex')}.${fileExt}`;
     const filePath = path.join(process.cwd(), 'downloads', filename);
     
     let videoInfo;
@@ -20,14 +22,21 @@ export async function downloadVK(url) {
       videoInfo = { title: 'VK Video' };
     }
     
-    await ytDlpWrap.execPromise([
-      url,
-      '-f', 'best[ext=mp4]/best',
-      '--merge-output-format', 'mp4',
-      '-o', filePath,
-      '--quiet',
-      '--no-warnings'
-    ]);
+    const args = [url];
+    
+    if (format === 'mp3') {
+      args.push('-x', '--audio-format', 'mp3', '--audio-quality', '0');
+    } else {
+      const height = quality === 'best' ? '9999' : quality;
+      const formatStr = format === 'webm'
+        ? `bestvideo[height<=${height}][ext=webm]+bestaudio[ext=webm]/best[height<=${height}]`
+        : `bestvideo[height<=${height}][ext=mp4]+bestaudio/best[height<=${height}][ext=mp4]/best`;
+      args.push('-f', formatStr, '--merge-output-format', format);
+    }
+    
+    args.push('-o', filePath, '--quiet', '--no-warnings');
+    
+    await ytDlpWrap.execPromise(args);
     
     if (!fs.existsSync(filePath)) {
       throw new Error('Video file was not created');

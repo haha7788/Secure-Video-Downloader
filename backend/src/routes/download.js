@@ -14,7 +14,7 @@ if (!fs.existsSync(downloadsDir)) {
 
 router.post('/', async (req, res) => {
   try {
-    const { url } = req.body;
+    const { url, format = 'mp4', quality = '720' } = req.body;
 
     if (!url) {
       return res.status(400).json({
@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
       });
     }
 
-    const result = await downloadVideo(url, platform);
+    const result = await downloadVideo(url, platform, { format, quality });
 
     if (!result.success) {
       return res.status(500).json({
@@ -97,7 +97,9 @@ router.get('/file/:filename', (req, res) => {
       return res.status(404).json({ error: 'File not found' });
     }
 
-    res.setHeader('Content-Type', 'video/mp4');
+    const contentType = filename.endsWith('.mp3') ? 'audio/mpeg' : 
+                        filename.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+    res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
 
     const fileStream = fs.createReadStream(filePath);

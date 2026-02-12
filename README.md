@@ -19,6 +19,8 @@
 - ▶️ **YouTube** - Download videos and Shorts in HD quality
 - 🎬 **VK** - Download videos from VK and VK Video
 - 📺 **Rutube** - Download videos from Rutube
+- 🎯 **Format Selection** - MP4, WebM, or MP3 (audio only)
+- 🎬 **Quality Selection** - Choose from 360p to 4K resolution
 - 🌐 **Multi-language** - English and Russian interface
 - 🌙 **Dark/Light Mode** - Adaptive theme with system preference detection
 - 🤖 **Telegram Bot** - Download videos directly in Telegram
@@ -173,17 +175,31 @@ const response = await fetch('http://localhost:3000/api/download', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    url: 'https://www.tiktok.com/@user/video/123456'
-    // url: 'https://www.instagram.com/reel/ABC123/'
-    // url: 'https://www.youtube.com/watch?v=abc123'
-    // url: 'https://vk.com/video-12345_67890'
-    // url: 'https://rutube.ru/video/abc123/'
+    url: 'https://www.youtube.com/watch?v=abc123',
+    format: 'mp4',
+    quality: '1080'
   })
 });
 
 const data = await response.json();
 console.log(data.downloadUrl);
 ```
+
+**Format & Quality Options:**
+
+- **Formats:**
+  - `mp4` - MP4 video format (default)
+  - `webm` - WebM video format
+  - `mp3` - Audio only (quality parameter ignored)
+
+- **Quality:** (applies to video formats only)
+  - `360` - 360p resolution
+  - `480` - 480p resolution
+  - `720` - 720p HD (default)
+  - `1080` - 1080p Full HD
+  - `1440` - 1440p 2K
+  - `2160` - 2160p 4K
+  - `best` - Best available quality
 
 ### 📝 License
 
@@ -206,6 +222,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - ▶️ **YouTube** - Загрузка видео и Shorts в HD качестве
 - 🎬 **VK** - Загрузка видео из VK и VK Video
 - 📺 **Rutube** - Загрузка видео с Rutube
+- 🎯 **Выбор формата** - MP4, WebM или MP3 (только аудио)
+- 🎬 **Выбор качества** - От 360p до 4K разрешения
 - 🌐 **Мультиязычность** - Интерфейс на английском и русском
 - 🌙 **Тёмная/Светлая тема** - Адаптивная тема с определением системных настроек
 - 🤖 **Telegram бот** - Загрузка видео прямо в Telegram
@@ -360,17 +378,31 @@ const response = await fetch('http://localhost:3000/api/download', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
-    url: 'https://www.tiktok.com/@user/video/123456'
-    // url: 'https://www.instagram.com/reel/ABC123/'
-    // url: 'https://www.youtube.com/watch?v=abc123'
-    // url: 'https://vk.com/video-12345_67890'
-    // url: 'https://rutube.ru/video/abc123/'
+    url: 'https://www.youtube.com/watch?v=abc123',
+    format: 'mp4',
+    quality: '1080'
   })
 });
 
 const data = await response.json();
 console.log(data.downloadUrl);
 ```
+
+**Опции формата и качества:**
+
+- **Форматы:**
+  - `mp4` - Видео в формате MP4 (по умолчанию)
+  - `webm` - Видео в формате WebM
+  - `mp3` - Только аудио (параметр качества игнорируется)
+
+- **Качество:** (применяется только к видео форматам)
+  - `360` - 360p разрешение
+  - `480` - 480p разрешение
+  - `720` - 720p HD (по умолчанию)
+  - `1080` - 1080p Full HD
+  - `1440` - 1440p 2K
+  - `2160` - 2160p 4K
+  - `best` - Лучшее доступное качество
 
 ### 📝 Лицензия
 

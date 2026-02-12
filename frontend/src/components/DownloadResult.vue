@@ -21,15 +21,25 @@
       </p>
     </div>
 
-    <div :class="['rounded-xl border overflow-hidden mb-6', border]">
+    <div v-if="!isAudioFile" :class="['rounded-xl border overflow-hidden mb-6', border]">
       <video
         controls
         :class="['w-full', theme === 'dark' ? 'bg-black' : 'bg-gray-900']"
         style="max-height: 400px;"
       >
-        <source :src="result.downloadUrl" type="video/mp4">
+        <source :src="result.downloadUrl" :type="getMediaType">
         Your browser does not support the video tag.
       </video>
+    </div>
+
+    <div v-else :class="['rounded-xl border overflow-hidden mb-6 p-6', border]">
+      <audio
+        controls
+        :class="['w-full']"
+      >
+        <source :src="result.downloadUrl" type="audio/mpeg">
+        Your browser does not support the audio tag.
+      </audio>
     </div>
 
     <div :class="['rounded-xl p-4 border mb-6 flex items-center gap-3', theme === 'dark' ? 'bg-orange-500/10 border-orange-500/30' : 'bg-orange-50 border-orange-200']">
@@ -86,7 +96,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { CheckCircle2, Timer, Package, Clock, Download, RotateCcw } from 'lucide-vue-next';
 import { useTheme } from '../composables/useTheme.js';
 import { useLocale } from '../composables/useLocale.js';
@@ -102,6 +112,16 @@ defineEmits(['reset']);
 const copied = ref(false);
 const { theme, card, border, input, muted, hover } = useTheme();
 const { t } = useLocale();
+
+const isAudioFile = computed(() => {
+  return props.result.filename?.endsWith('.mp3') || false;
+});
+
+const getMediaType = computed(() => {
+  if (props.result.filename?.endsWith('.webm')) return 'video/webm';
+  if (props.result.filename?.endsWith('.mp3')) return 'audio/mpeg';
+  return 'video/mp4';
+});
 
 const copyLink = () => {
   navigator.clipboard.writeText(getFullDownloadUrl(props.result.downloadUrl));

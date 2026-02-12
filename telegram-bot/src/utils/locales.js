@@ -15,11 +15,11 @@ export const translations = {
     error: '❌ Ошибка',
     invalidUrl: '❌ Пожалуйста, отправь корректную ссылку на видео.\n\nИспользуй /help для получения справки.',
     errorProcessing: '❌ Произошла ошибка при обработке видео.\n\nПопробуй другую ссылку или повтори позже.',
-    downloaded: '✅ *Загружено с',
-    description: '📝 Описание',
-    duration: '⏱ Длительность',
-    size: '📦 Размер',
-    downloadedVia: '🔗 Скачано через',
+    downloaded: 'Загружено с',
+    description: 'Описание',
+    duration: 'Длительность',
+    size: 'Размер',
+    downloadedVia: 'Скачано через',
     downloadMore: '🔄 Скачать еще',
     infoTitle: 'ℹ️ *Информация о боте*',
     infoDescription: '*SecureVideoDownloader Bot* — скачивай видео с популярных платформ быстро и бесплатно!',
@@ -35,7 +35,11 @@ export const translations = {
     fastProcessing: '✅ Быстрая обработка',
     noLimits: '✅ Никаких ограничений',
     free: '✅ Полностью бесплатно',
-    backButton: '🔙 Назад'
+    backButton: '🔙 Назад',
+    selectFormat: '📹 *Выбери формат для скачивания:*',
+    selectQuality: '🎬 *Выбери качество видео:*',
+    cancel: '❌ Отмена',
+    best: '⭐ Лучшее качество'
   },
   
   en: {
@@ -54,11 +58,11 @@ export const translations = {
     error: '❌ Error',
     invalidUrl: '❌ Please send a valid video link.\n\nUse /help for instructions.',
     errorProcessing: '❌ An error occurred while processing the video.\n\nTry another link or try again later.',
-    downloaded: '✅ *Downloaded from',
-    description: '📝 Description',
-    duration: '⏱ Duration',
-    size: '📦 Size',
-    downloadedVia: '🔗 Downloaded via',
+    downloaded: 'Downloaded from',
+    description: 'Description',
+    duration: 'Duration',
+    size: 'Size',
+    downloadedVia: 'Downloaded via',
     downloadMore: '🔄 Download more',
     infoTitle: 'ℹ️ *Bot Information*',
     infoDescription: '*SecureVideoDownloader Bot* — download videos from popular platforms quickly and for free!',
@@ -74,6 +78,10 @@ export const translations = {
     fastProcessing: '✅ Fast processing',
     noLimits: '✅ No limits',
     free: '✅ Completely free',
-    backButton: '🔙 Back'
+    backButton: '🔙 Back',
+    selectFormat: '📹 *Select download format:*',
+    selectQuality: '🎬 *Select video quality:*',
+    cancel: '❌ Cancel',
+    best: '⭐ Best quality'
   }
 };

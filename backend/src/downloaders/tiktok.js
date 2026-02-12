@@ -3,15 +3,17 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 
-export async function downloadTikTok(url) {
+export async function downloadTikTok(url, options = {}) {
   try {
+    const { format = 'mp4' } = options;
     const videoData = await getTikTokVideoData(url);
     
     if (!videoData) {
       throw new Error('Не удалось получить данные видео');
     }
     
-    const filename = `tiktok_${crypto.randomBytes(8).toString('hex')}.mp4`;
+    const fileExt = format === 'mp3' ? 'mp3' : 'mp4';
+    const filename = `tiktok_${crypto.randomBytes(8).toString('hex')}.${fileExt}`;
     const filePath = path.join(process.cwd(), 'downloads', filename);
     
     const response = await axios({

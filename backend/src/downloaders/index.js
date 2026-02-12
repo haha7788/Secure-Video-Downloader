@@ -4,24 +4,24 @@ import { downloadYouTube } from './youtube.js';
 import { downloadVK } from './vk.js';
 import { downloadRutube } from './rutube.js';
 
-export async function downloadVideo(url, platform) {
+export async function downloadVideo(url, platform, options = {}) {
   try {
     switch (platform.toLowerCase()) {
       case 'tiktok':
-        return await downloadTikTok(url);
+        return await downloadTikTok(url, options);
       
       case 'instagram':
-        return await downloadInstagram(url);
+        return await downloadInstagram(url, options);
       
       case 'youtube':
-        return await downloadYouTube(url);
+        return await downloadYouTube(url, options);
       
       case 'vk':
       case 'vk video':
-        return await downloadVK(url);
+        return await downloadVK(url, options);
       
       case 'rutube':
-        return await downloadRutube(url);
+        return await downloadRutube(url, options);
       
       default:
         return {

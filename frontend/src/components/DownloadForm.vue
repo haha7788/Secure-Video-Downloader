@@ -49,7 +49,7 @@
           v-model="url"
           type="text"
           :placeholder="t('input.placeholder')"
-          @keyup.enter="$emit('download', url)"
+          @keyup.enter="handleDownload"
           :class="[
             'w-full px-4 py-3 rounded-xl border transition-all text-sm',
             theme === 'dark'
@@ -61,8 +61,56 @@
         <p v-if="error" :class="['text-xs mt-2 text-red-500']">{{ error }}</p>
       </div>
 
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div>
+          <label :class="['block text-xs font-medium mb-2', muted]">
+            {{ t('format.label') }}
+          </label>
+          <select
+            v-model="selectedFormat"
+            :class="[
+              'w-full px-4 py-3 rounded-xl border transition-all text-sm',
+              theme === 'dark'
+                ? 'bg-[#1a1a1a] border-gray-700 text-white focus:border-white'
+                : 'bg-gray-50 border-gray-200 text-black focus:border-gray-900'
+            ]"
+            style="outline: none; box-shadow: none;"
+          >
+            <option value="mp4">MP4</option>
+            <option value="webm">WebM</option>
+            <option value="mp3">MP3</option>
+          </select>
+        </div>
+
+        <div>
+          <label :class="['block text-xs font-medium mb-2', muted]">
+            {{ t('quality.label') }}
+          </label>
+          <select
+            v-model="selectedQuality"
+            :disabled="selectedFormat === 'mp3'"
+            :class="[
+              'w-full px-4 py-3 rounded-xl border transition-all text-sm',
+              theme === 'dark'
+                ? 'bg-[#1a1a1a] border-gray-700 text-white focus:border-white'
+                : 'bg-gray-50 border-gray-200 text-black focus:border-gray-900',
+              selectedFormat === 'mp3' ? 'opacity-50 cursor-not-allowed' : ''
+            ]"
+            style="outline: none; box-shadow: none;"
+          >
+            <option value="360">360p</option>
+            <option value="480">480p</option>
+            <option value="720">720p</option>
+            <option value="1080">1080p</option>
+            <option value="1440">1440p</option>
+            <option value="2160">4K</option>
+            <option value="best">{{ t('quality.best') }}</option>
+          </select>
+        </div>
+      </div>
+
       <button
-        @click="$emit('download', url)"
+        @click="handleDownload"
         :disabled="loading || !url"
         :class="[
           'w-full py-3.5 rounded-xl font-semibold transition-all text-sm shadow-sm',
@@ -101,9 +149,20 @@ const props = defineProps({
   error: String
 });
 
-defineEmits(['download']);
+const emit = defineEmits(['download']);
 
 const url = ref('');
+const selectedFormat = ref('mp4');
+const selectedQuality = ref('720');
 const { theme, card, border, muted } = useTheme();
 const { t } = useLocale();
+
+const handleDownload = () => {
+  if (!url.value || props.loading) return;
+  emit('download', {
+    url: url.value,
+    format: selectedFormat.value,
+    quality: selectedQuality.value
+  });
+};
 </script>

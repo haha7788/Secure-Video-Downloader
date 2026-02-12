@@ -1,5 +1,12 @@
 export const translations = {
   ru: {
+    format: {
+      label: 'Формат'
+    },
+    quality: {
+      label: 'Качество',
+      best: 'Лучшее'
+    },
     hero: {
       title: 'Скачивай видео легко',
       subtitle: 'TikTok • Instagram • YouTube • VK • Rutube'
@@ -70,6 +77,13 @@ export const translations = {
     footer: 'Безопасная загрузка видео'
   },
   en: {
+    format: {
+      label: 'Format'
+    },
+    quality: {
+      label: 'Quality',
+      best: 'Best'
+    },
     hero: {
       title: 'Download Videos Easily',
       subtitle: 'TikTok • Instagram • YouTube • VK • Rutube'

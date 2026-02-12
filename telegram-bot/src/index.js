@@ -9,7 +9,11 @@ import {
   showMainMenu,
   showInfo,
   handleLanguageSelection,
-  handleLanguageChange
+  handleLanguageChange,
+  handleFormatSelection,
+  handleQualitySelection,
+  cancelDownload,
+  userDownloadState
 } from './handlers/user.js';
 
 dotenv.config();
@@ -47,6 +51,10 @@ bot.action('lang_ru', (ctx) => handleLanguageSelection(ctx, 'ru'));
 bot.action('lang_en', (ctx) => handleLanguageSelection(ctx, 'en'));
 bot.action('change_lang', handleLanguageChange);
 
+bot.action(/^format_(.+)$/, (ctx) => handleFormatSelection(ctx, ctx.match[1]));
+bot.action(/^quality_(.+)$/, (ctx) => handleQualitySelection(ctx, ctx.match[1]));
+bot.action('cancel_download', cancelDownload);
+
 bot.on(message('text'), async (ctx) => {
   const text = ctx.message.text.trim();
   const lang = userLanguageManager.getLanguage(ctx.from.id);
@@ -60,92 +68,13 @@ bot.on(message('text'), async (ctx) => {
     );
   }
   
-  const processingEmojis = ['⏳', '🔄', '⚡', '🎬'];
-  let emojiIndex = 0;
+  userDownloadState.set(ctx.from.id, { url: text });
   
-  const processingMsg = await ctx.reply(`${processingEmojis[0]} ${t.processing} ${t.video}`);
-  
-  const animationInterval = setInterval(async () => {
-    emojiIndex = (emojiIndex + 1) % processingEmojis.length;
-    try {
-      await ctx.telegram.editMessageText(
-        ctx.chat.id,
-        processingMsg.message_id,
-        null,
-        `${processingEmojis[emojiIndex]} ${t.processing} ${t.video}`
-      );
-    } catch (e) {
-    }
-  }, 1000);
-  
-  try {
-    const response = await axios.post(`${BACKEND_URL}/api/download`, {
-      url: text
-    });
-    
-    clearInterval(animationInterval);
-    
-    if (!response.data.success) {
-      await ctx.telegram.editMessageText(
-        ctx.chat.id,
-        processingMsg.message_id,
-        null,
-        `${t.error}: ${response.data.error}`
-      );
-      return;
-    }
-    
-    await ctx.telegram.deleteMessage(ctx.chat.id, processingMsg.message_id);
-    
-    const data = response.data;
-    const sizeMB = (data.fileSize / (1024 * 1024)).toFixed(2);
-    
-    const botUsername = ctx.botInfo.username.replace(/_/g, '\\_');
-    
-    const escapeMarkdown = (text) => text.replace(/[_*\[\]()~`>#+\-=|{}.!]/g, '\\$&');
-    
-    const videoTitle = data.title ? escapeMarkdown(data.title) : (lang === 'ru' ? 'Без названия' : 'Untitled');
-    const duration = data.duration ? `${t.duration}: ${data.duration}` : '';
-    
-    const caption = `
-${t.downloaded} ${data.platform}*
-
-${t.description}: ${videoTitle}
-${duration ? duration + '\n' : ''}${t.size}: ${sizeMB} MB
-
-${t.downloadedVia} @${botUsername}
-    `.trim();
-    
-    const videoUrl = `${BACKEND_URL}${data.downloadUrl}`;
-    
-    await ctx.replyWithVideo(
-      { url: videoUrl },
-      { 
-        caption,
-        parse_mode: 'Markdown',
-        reply_markup: {
-          inline_keyboard: [
-            [{ text: t.downloadMore, callback_data: 'back_to_main' }]
-          ]
-        }
-      }
-    );
-    
-  } catch (error) {
-    clearInterval(animationInterval);
-    console.error('Error processing video:', error);
-    
-    try {
-      await ctx.telegram.editMessageText(
-        ctx.chat.id,
-        processingMsg.message_id,
-        null,
-        t.errorProcessing
-      );
-    } catch (e) {
-      await ctx.reply(t.errorProcessing);
-    }
-  }
+  const { formatSelectionKeyboard } = await import('./utils/keyboards.js');
+  return ctx.reply(t.selectFormat, { 
+    parse_mode: 'Markdown', 
+    ...formatSelectionKeyboard(lang)
+  });
 });
 
 bot.catch((err, ctx) => {

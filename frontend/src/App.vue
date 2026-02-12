@@ -55,14 +55,18 @@ const stats = ref({
   platforms: { tiktok: 0, instagram: 0, youtube: 0 }
 });
 
-const handleDownload = async (url) => {
+const handleDownload = async (data) => {
+  const url = typeof data === 'string' ? data : data.url;
+  const format = typeof data === 'string' ? 'mp4' : data.format;
+  const quality = typeof data === 'string' ? '720' : data.quality;
+  
   if (!url || loading.value) return;
 
   error.value = '';
   loading.value = true;
 
   try {
-    const response = await axios.post('/api/download', { url });
+    const response = await axios.post('/api/download', { url, format, quality });
     
     if (response.data.success) {
       downloadResult.value = response.data;
